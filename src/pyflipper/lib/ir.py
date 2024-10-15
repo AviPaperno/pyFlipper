@@ -15,7 +15,7 @@ class Ir(Threaded):
         assert is_hexstring(hex_command), "hex_command must be hexstring"
         address = ' '.join(hex_address[i:i+2] for i in range(0, len(hex_address), 2)) if " " not in hex_address else hex_address
         command = ' '.join(hex_command[i:i+2] for i in range(0, len(hex_command), 2)) if " " not in hex_command else hex_command
-        self._serial_wrapper.send(f"ir tx {protocol} {address} {command}")
+        self._serial_wrapper.send(f"ir tx {protocol} {hex_address} {hex_command}")
 
     def rx(self, timeout: int = 5) -> str:
         def _run() -> str:
