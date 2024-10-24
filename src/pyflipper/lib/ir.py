@@ -4,7 +4,7 @@ from .utils import is_hexstring
 class Ir(Threaded):
     # TODO: auto parse available protocols from >: ir help
     PROTOCOLS = ["NEC", "NEC42", "NEC42ext", "Samsung32",
-                 "RC6", "RC5", "RC5X", "SIRC", "SIRC15", "SIRC20"]
+                 "RC6", "RC5", "RC5X", "SIRC", "SIRC15", "SIRC20","NECext"]
 
     def __init__(self, serial_wrapper) -> None:
         self._serial_wrapper = serial_wrapper
