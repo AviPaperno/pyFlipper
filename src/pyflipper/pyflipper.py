@@ -30,7 +30,7 @@ class PyFlipper:
         assert sum(bool(kwargs.get(k)) for k in ('com', 'ws', 'tcp')) == 1, \
             'Only one of com, ws, tcp should be specified'
         if kwargs.get('com'):
-            self._serial_wrapper = LocalSerial(com=kwargs['com'])
+            self._serial_wrapper = LocalSerial(com=kwargs['com'], timeout = 1)
         elif kwargs.get('ws'):
             self._serial_wrapper = WSSerial(ws=kwargs['ws']) 
         else:
