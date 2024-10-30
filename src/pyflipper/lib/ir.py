@@ -4,7 +4,7 @@ from .utils import is_hexstring
 class Ir(Threaded):
     # TODO: auto parse available protocols from >: ir help
     PROTOCOLS = ["NEC", "NEC42", "NEC42ext", "Samsung32",
-                 "RC6", "RC5", "RC5X", "SIRC", "SIRC15", "SIRC20","NECext"]
+                 "RC6", "RC5", "RC5X", "SIRC", "SIRC15", "SIRC20",'NECext']
 
     def __init__(self, serial_wrapper) -> None:
         self._serial_wrapper = serial_wrapper
@@ -13,7 +13,9 @@ class Ir(Threaded):
         assert protocol in self.PROTOCOLS, f"Available protocols: {self.PROTOCOLS}"
         assert is_hexstring(hex_address), "hex_address must be hexstring"
         assert is_hexstring(hex_command), "hex_command must be hexstring"
-        self._serial_wrapper.send(f"ir tx {protocol} {address} {command}")
+        print(f"ir tx {protocol} {hex_address} {hex_command}")
+        self._serial_wrapper.send(f"ir tx {protocol} {hex_address} {hex_command}")
+
 
     def rx(self, timeout: int = 5) -> str:
         def _run() -> str:
@@ -28,5 +30,7 @@ class Ir(Threaded):
         assert duty_cycle >= 0.0 and duty_cycle <= 1.0, "Duty cycle must be in range (0.0 - 1.0)"
         if isinstance(samples, list):
             samples = " ".join(list(map(lambda x: str(x), samples)))
+        print(f"ir tx RAW F:{frequency} DC:{int(duty_cycle*100)} {samples}")
+
         self._serial_wrapper.send(f"ir tx RAW F:{frequency} DC:{int(duty_cycle*100)} {samples}")
 
