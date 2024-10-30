@@ -16,9 +16,9 @@ def error_handler(func):
     return handler
 
 class LocalSerial:
-    def __init__(self, com) -> None:
+    def __init__(self, com, timeout = None) -> None:
         self._serial_port = serial.Serial(port=com, baudrate=9600,
-                                         bytesize=8, timeout=None, stopbits=serial.STOPBITS_ONE)
+                                         bytesize=8, timeout=timeout, stopbits=serial.STOPBITS_ONE)
         self._serial_port.read_until(b'>:') #skip welcome banner
 
     @error_handler
